@@ -50,3 +50,5 @@ C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShoppi
 C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\obj\Debug\net6.0\ref\GeekShopping.IdentityServer.dll
 C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\obj\Debug\net6.0\scopedcss\projectbundle\GeekShopping.IdentityServer.bundle.scp.css
+C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\bin\Debug\net6.0\Humanizer.dll
+C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
