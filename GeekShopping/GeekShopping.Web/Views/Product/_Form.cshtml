@@ -1,6 +1,6 @@
 ﻿@model ProductModel
 @{
-    var isNewProduct = Model.Id == 0;
+    var isNewProduct = Model?.Id == 0 || Model == null;
 }
 
 <form asp-action="@(isNewProduct ? "ProductCreate" : "ProductUpdate")">
