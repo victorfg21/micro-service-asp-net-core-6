@@ -6,11 +6,11 @@
 
         public long CartHeaderId { get; set; }
 
-        public CartHeaderVO CartHeader { get; set; } = new CartHeaderVO();
+        public CartHeaderVO? CartHeader { get; set; }
 
         public long ProductId { get; set; }
 
-        public ProductVO Product { get; set; } = new ProductVO();
+        public ProductVO Product { get; set; }
 
         public int Count { get; set; }
     }

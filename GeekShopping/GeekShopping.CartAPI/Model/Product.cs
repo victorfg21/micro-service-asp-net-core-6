@@ -13,7 +13,7 @@ namespace GeekShopping.CartAPI.Model
         [Column("name")]
         [Required]
         [StringLength(150)]
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         [Column("price")]
         [Required]
@@ -22,14 +22,14 @@ namespace GeekShopping.CartAPI.Model
 
         [Column("description")]
         [StringLength(500)]
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; }
 
         [Column("category_name")]
         [StringLength(50)]
-        public string CategoryName { get; set; } = string.Empty;
+        public string CategoryName { get; set; }
 
         [Column("image_url")]
         [StringLength(300)]
-        public string ImageUrl { get; set; } = string.Empty;
+        public string ImageUrl { get; set; }
     }
 }
