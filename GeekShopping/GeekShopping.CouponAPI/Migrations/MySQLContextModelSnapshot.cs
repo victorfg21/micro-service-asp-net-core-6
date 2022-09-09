@@ -38,6 +38,20 @@ namespace GeekShopping.CouponAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("coupon");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CouponCode = "ERUDIO_2022_10",
+                            DiscountAmount = 10m
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CouponCode = "ERUDIO_2022_15",
+                            DiscountAmount = 15m
+                        });
                 });
 #pragma warning restore 612, 618
         }

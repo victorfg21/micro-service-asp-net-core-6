@@ -10,13 +10,16 @@ namespace GeekShopping.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICartService _cartService;
+        private readonly ICouponService _couponService;
 
         public CartController(
             IProductService productService,
-            ICartService cartService)
+            ICartService cartService,
+            ICouponService couponService)
         {
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
             _cartService = cartService ?? throw new ArgumentNullException(nameof(cartService));
+            _couponService = couponService ?? throw new ArgumentNullException(nameof(couponService));
         }
 
         [Authorize]
@@ -57,7 +60,7 @@ namespace GeekShopping.Web.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Remove (int id)
+        public async Task<IActionResult> Remove(int id)
         {
             var token = await HttpContext.GetContextTokenAsync();
             var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value!;
@@ -78,10 +81,21 @@ namespace GeekShopping.Web.Controllers
             var response = await _cartService.FindCartByUserId(userId, token);
             if (response?.CartHeader != null)
             {
+                if (!string.IsNullOrEmpty(response.CartHeader.CouponCode))
+                {
+                    var coupon = await _couponService.GetCoupon(response.CartHeader.CouponCode, token);
+                    if (coupon?.CouponCode != null)
+                    {
+                        response.CartHeader.DiscountAmount = coupon.DiscountAmount;
+                    }
+                }
+
                 foreach (var cartDetail in response.CartDetails)
                 {
                     response.CartHeader.PurchaseAmount += (cartDetail.Product.Price * cartDetail.Count);
                 }
+
+                response.CartHeader.PurchaseAmount -= response.CartHeader.DiscountAmount;
             }
 
             return response ?? new CartViewModel();
