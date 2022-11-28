@@ -2,6 +2,7 @@
 using GeekShopping.CartAPI.Messages;
 using GeekShopping.CartAPI.RabbitMQSender;
 using GeekShopping.CartAPI.Repository;
+using GeekShopping.CartAPI.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekShopping.CartAPI.Controllers
@@ -11,12 +12,14 @@ namespace GeekShopping.CartAPI.Controllers
     public class CartController : ControllerBase
     {
         private readonly ICartRepository _cartRepository;
+        private readonly ICouponRepository _couponRepository;
         private readonly IRabbitMQMessageSender _rabbitMQMessageSender;
 
-        public CartController(ICartRepository cartRepository, IRabbitMQMessageSender rabbitMQMessageSender)
+        public CartController(ICartRepository cartRepository, ICouponRepository couponRepository, IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
-            _rabbitMQMessageSender = rabbitMQMessageSender ?? throw new ArgumentNullException(nameof(cartRepository));
+            _couponRepository = couponRepository ?? throw new ArgumentNullException(nameof(couponRepository));
+            _rabbitMQMessageSender = rabbitMQMessageSender ?? throw new ArgumentNullException(nameof(rabbitMQMessageSender));
         }
 
         [HttpGet("find-cart/{id}")]
@@ -70,10 +73,22 @@ namespace GeekShopping.CartAPI.Controllers
         [HttpPost("checkout")]
         public async Task<ActionResult<CheckoutHeaderVO>> Checkout(CheckoutHeaderVO vo)
         {
-            if (vo?.UserId == null) return BadRequest();
+            if (vo?.UserId == null)
+                return BadRequest();
 
             var cart = await _cartRepository.FindCartByUserId(vo.UserId);
-            if (cart == null) return NotFound();
+            if (cart == null) 
+                return NotFound();
+
+            if(!string.IsNullOrEmpty(vo.CouponCode))
+            {
+                var token = await HttpContext.GetContextTokenAsync();
+                CouponVO coupon = await _couponRepository.GetCoupon(vo.CouponCode, token);
+
+                if (vo.DiscountAmount != coupon.DiscountAmount)
+                    return StatusCode(412);
+            }
+
             vo.CartDetails = cart.CartDetails;
             vo.DateTime = DateTime.Now;
 

@@ -1,5 +1,6 @@
 ﻿using GeekShopping.OrderAPI.Messages;
 using GeekShopping.OrderAPI.Model;
+using GeekShopping.OrderAPI.RabbitMQSender;
 using GeekShopping.OrderAPI.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -13,11 +14,17 @@ namespace GeekShopping.OrderAPI.MessageConsumer
         private readonly OrderRepository _orderRepository;
         private IConnection _connection;
         private IModel _channel;
-        private readonly string QueueName = "checkoutqueue";
+        private IRabbitMQMessageSender _rabbitMQMessageSender;
 
-        public RabbitMQCheckoutConsumer(OrderRepository orderRepository)
+        private readonly string QueueNameCheckout = "checkoutqueue";
+        private readonly string QueueNamePaymentProcess = "orderpaymentprocessqueue";
+
+        public RabbitMQCheckoutConsumer(
+            OrderRepository orderRepository,
+            IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
+            _rabbitMQMessageSender = rabbitMQMessageSender;
             var factory = new ConnectionFactory
             {
                 HostName = "localhost",
@@ -28,7 +35,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
 
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(QueueName, false, false, false);
+            _channel.QueueDeclare(QueueNameCheckout, false, false, false);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -42,7 +49,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 ProcessOrder(vo).GetAwaiter().GetResult();
                 _channel.BasicAck(evt.DeliveryTag, false);
             };
-            _channel.BasicConsume(QueueName, false, consumer);
+            _channel.BasicConsume(QueueNameCheckout, false, consumer);
             return Task.CompletedTask;
         }
 
@@ -82,6 +89,26 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             }
 
             await _orderRepository.AddOrder(order);
+
+            PaymentVO payment = new()
+            {
+                Name = $"{order.FirstName} {order.LastName}",
+                CardNumber = order.CardNumber,
+                CVV = order.CVV,
+                ExpiryMonthYear = order.ExpiryMonthYear,
+                OrderId = order.Id,
+                PurchaseAmount = order.PurchaseAmount,
+                Email = order.Email,
+            };
+
+            try
+            {
+                _rabbitMQMessageSender.SendMessage(payment, QueueNamePaymentProcess);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

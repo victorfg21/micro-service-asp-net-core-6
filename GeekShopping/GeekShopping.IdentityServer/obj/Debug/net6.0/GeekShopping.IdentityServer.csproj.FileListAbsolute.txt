@@ -52,4 +52,4 @@ C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShoppi
 C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\obj\Debug\net6.0\scopedcss\projectbundle\GeekShopping.IdentityServer.bundle.scp.css
 C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\bin\Debug\net6.0\Humanizer.dll
 C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
-C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\bin\Debug\net6.0\keys\is-signing-key-0B7E1B8D8428121C1C30F2969F3D2751.json
+C:\Users\victo\source\repos\erudio-microservices-dotnet6\GeekShopping\GeekShopping.IdentityServer\bin\Debug\net6.0\keys\is-signing-key-3956F25DFA487EEA5EE70C1469FB60DA.json

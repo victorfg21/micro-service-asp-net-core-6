@@ -27,5 +27,7 @@
         public string CVV { get; set; }
 
         public string ExpiryMonthYear { get; set; }
+
+        public int CartTotalItens { get; set; }
     }
 }

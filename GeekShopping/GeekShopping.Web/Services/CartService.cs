@@ -1,6 +1,7 @@
 ﻿using GeekShopping.Web.Models;
 using GeekShopping.Web.Services.IServices;
 using GeekShopping.Web.Utils;
+using System.Net;
 using System.Text.Json;
 
 namespace GeekShopping.Web.Services
@@ -33,13 +34,15 @@ namespace GeekShopping.Web.Services
             else throw new Exception("Something went wrong calling the API");
         }
 
-        public async Task<CartHeaderViewModel> Checkout(CartHeaderViewModel model, string token)
+        public async Task<object> Checkout(CartHeaderViewModel model, string token)
         {
             var json = JsonSerializer.Serialize(model);
             _client.SetHeaderRequestToken(token);
             var response = await _client.PostAsJson($"{BasePath}/checkout", model);
             if (response.IsSuccessStatusCode)
                 return await response.ReadContentAs<CartHeaderViewModel>();
+            else if (response.StatusCode == HttpStatusCode.PreconditionFailed)
+                return "Coupon Price has changed, please confirm!";
             else throw new Exception("Something went wrong when calling API");
         }
 
