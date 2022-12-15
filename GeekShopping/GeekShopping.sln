@@ -32,7 +32,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payments", "Payments", "{51
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekShopping.PaymentProcessor", "GeekShopping.PaymentProcessor\GeekShopping.PaymentProcessor.csproj", "{5BDAA9F4-D6BD-4169-9D47-4AC703A529C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekShopping.PaymentAPI", "GeekShopping.PaymentAPI\GeekShopping.PaymentAPI.csproj", "{DBEF68BE-58CF-4D12-B33C-3DE3A0825941}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekShopping.PaymentAPI", "GeekShopping.PaymentAPI\GeekShopping.PaymentAPI.csproj", "{DBEF68BE-58CF-4D12-B33C-3DE3A0825941}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekShopping.Email", "GeekShopping.Email\GeekShopping.Email.csproj", "{45D7B9B9-07A6-4A2F-A23B-1D6A539F6FFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +78,10 @@ Global
 		{DBEF68BE-58CF-4D12-B33C-3DE3A0825941}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBEF68BE-58CF-4D12-B33C-3DE3A0825941}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBEF68BE-58CF-4D12-B33C-3DE3A0825941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45D7B9B9-07A6-4A2F-A23B-1D6A539F6FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45D7B9B9-07A6-4A2F-A23B-1D6A539F6FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45D7B9B9-07A6-4A2F-A23B-1D6A539F6FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45D7B9B9-07A6-4A2F-A23B-1D6A539F6FFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{A6324C87-8411-42BE-9383-C0B5FDEE9BD4} = {01F82106-F965-4546-8CF3-119D8B8F6E5C}
 		{5BDAA9F4-D6BD-4169-9D47-4AC703A529C1} = {51B7C107-71B3-4716-94BB-69ECAAA5432E}
 		{DBEF68BE-58CF-4D12-B33C-3DE3A0825941} = {01F82106-F965-4546-8CF3-119D8B8F6E5C}
+		{45D7B9B9-07A6-4A2F-A23B-1D6A539F6FFF} = {01F82106-F965-4546-8CF3-119D8B8F6E5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6AAA5CD1-006F-419D-A25A-231EE47A7D1A}

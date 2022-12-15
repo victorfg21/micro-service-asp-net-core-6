@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "h3YZXrwmAw9wl1z65IsI5EJa+/NH+63NjCwlfu1JGfEi0uc5QoPOXIKbpJiM99jDjvt57NlxvD5Jrb66FEj0/w==",
+  "dgSpecHash": "CP9gNSwRK6GeGrnZ0BliYO+d5Xp6UAKcBg1wkRRFhByFl/OIDRMiwldtqQcXmWTSUerHLPpvh1HdOEQiPHMfew==",
   "success": true,
   "projectFilePath": "C:\\Users\\victo\\source\\repos\\erudio-microservices-dotnet6\\GeekShopping\\GeekShopping.PaymentAPI\\GeekShopping.PaymentAPI.csproj",
   "expectedPackageFiles": [
