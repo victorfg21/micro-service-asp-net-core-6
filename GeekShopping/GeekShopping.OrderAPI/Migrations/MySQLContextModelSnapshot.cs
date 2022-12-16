@@ -75,7 +75,6 @@ namespace GeekShopping.OrderAPI.Migrations
                         .HasColumnName("total_items");
 
                     b.Property<string>("CouponCode")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("coupon_code");
 
@@ -137,7 +136,7 @@ namespace GeekShopping.OrderAPI.Migrations
             modelBuilder.Entity("GeekShopping.OrderAPI.Model.OrderDetail", b =>
                 {
                     b.HasOne("GeekShopping.OrderAPI.Model.OrderHeader", "OrderHeader")
-                        .WithMany("CartDetails")
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -147,7 +146,7 @@ namespace GeekShopping.OrderAPI.Migrations
 
             modelBuilder.Entity("GeekShopping.OrderAPI.Model.OrderHeader", b =>
                 {
-                    b.Navigation("CartDetails");
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
